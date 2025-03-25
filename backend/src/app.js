@@ -1,8 +1,14 @@
 const express = require("express")
+const cors = require("cors")
+const linkRoutes = require("./routes/linkRoutes")
 const app = express()
-const routes = require("./api/routes")
 
+app.use(cors())
 app.use(express.json())
-app.use("/", routes)
+app.use("/api/links", linkRoutes)
+
+app.get("/", (req, res) => {
+  res.send("Bienvenido al acortador de URLs")
+})
 
 module.exports = app
