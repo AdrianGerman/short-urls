@@ -1,18 +1,25 @@
-const linkModel = require("../models/link")
+const Link = require("../models/link")
 
-exports.shortenLink = (req, res) => {
+exports.shortenLink = async (req, res) => {
   const { url } = req.body
-  const shortUrl = linkModel.generateShortUrl()
-  linkModel.create(shortUrl, url)
-  res.json({ originalUrl: url, shortUrl })
+  try {
+    const shortUrl = await Link.create(url)
+    res.json({ originalUrl: url, shortUrl })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 }
 
-exports.redirectToOriginal = (req, res) => {
+exports.redirectToOriginal = async (req, res) => {
   const { shortUrl } = req.params
-  const originalUrl = linkModel.find(shortUrl)
-  if (originalUrl) {
-    res.redirect(originalUrl)
-  } else {
-    res.status(404).send("URL not found")
+  try {
+    const originalUrl = await Link.findByShortUrl(shortUrl)
+    if (originalUrl) {
+      res.redirect(originalUrl)
+    } else {
+      res.status(404).send("URL not found")
+    }
+  } catch (error) {
+    res.status(500).send("Server Error")
   }
 }
