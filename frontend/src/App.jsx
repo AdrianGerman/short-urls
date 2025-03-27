@@ -1,10 +1,10 @@
-import "./App.css"
+import { Header } from "./components/Header"
 
 function App() {
   return (
-    <>
-      <h1 className="text-6xl font-bold">Short URLs</h1>
-    </>
+    <div className="min-h-screen text-foreground dark">
+      <Header />
+    </div>
   )
 }
 
