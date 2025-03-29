@@ -1,5 +1,6 @@
 import { CTASection } from "./components/CTASection"
 import { FeaturesSection } from "./components/FeaturesSection"
+import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { HeroSection } from "./components/HeroSection"
 import { PricingSection } from "./components/PricingSection"
@@ -13,6 +14,7 @@ function App() {
         <FeaturesSection />
         <PricingSection />
         <CTASection />
+        <Footer />
       </main>
     </div>
   )
